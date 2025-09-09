@@ -1,130 +1,150 @@
-import { desc, and, eq, isNull } from 'drizzle-orm';
+import { desc, and, eq } from 'drizzle-orm';
 import { db } from './drizzle';
-import { activityLogs, teamMembers, teams, users } from './schema';
-import { cookies } from 'next/headers';
-import { verifyToken } from '@/lib/auth/session';
+import { organizations, memberships, portals, portalEvents } from './schema';
+import { getUser } from '@/lib/auth/session';
 
-export async function getUser() {
-  const sessionCookie = (await cookies()).get('session');
-  if (!sessionCookie || !sessionCookie.value) {
-    return null;
-  }
-
-  const sessionData = await verifyToken(sessionCookie.value);
-  if (
-    !sessionData ||
-    !sessionData.user ||
-    typeof sessionData.user.id !== 'number'
-  ) {
-    return null;
-  }
-
-  if (new Date(sessionData.expires) < new Date()) {
-    return null;
-  }
-
-  const user = await db
-    .select()
-    .from(users)
-    .where(and(eq(users.id, sessionData.user.id), isNull(users.deletedAt)))
-    .limit(1);
-
-  if (user.length === 0) {
-    return null;
-  }
-
-  return user[0];
-}
-
-export async function getTeamByStripeCustomerId(customerId: string) {
-  const result = await db
-    .select()
-    .from(teams)
-    .where(eq(teams.stripeCustomerId, customerId))
-    .limit(1);
-
-  return result.length > 0 ? result[0] : null;
-}
-
-export async function updateTeamSubscription(
-  teamId: number,
-  subscriptionData: {
-    stripeSubscriptionId: string | null;
-    stripeProductId: string | null;
-    planName: string | null;
-    subscriptionStatus: string;
-  }
-) {
-  await db
-    .update(teams)
-    .set({
-      ...subscriptionData,
-      updatedAt: new Date()
-    })
-    .where(eq(teams.id, teamId));
-}
-
-export async function getUserWithTeam(userId: number) {
-  const result = await db
-    .select({
-      user: users,
-      teamId: teamMembers.teamId
-    })
-    .from(users)
-    .leftJoin(teamMembers, eq(users.id, teamMembers.userId))
-    .where(eq(users.id, userId))
-    .limit(1);
-
-  return result[0];
-}
-
-export async function getActivityLogs() {
-  const user = await getUser();
-  if (!user) {
-    throw new Error('User not authenticated');
-  }
-
-  return await db
-    .select({
-      id: activityLogs.id,
-      action: activityLogs.action,
-      timestamp: activityLogs.timestamp,
-      ipAddress: activityLogs.ipAddress,
-      userName: users.name
-    })
-    .from(activityLogs)
-    .leftJoin(users, eq(activityLogs.userId, users.id))
-    .where(eq(activityLogs.userId, user.id))
-    .orderBy(desc(activityLogs.timestamp))
-    .limit(10);
-}
-
-export async function getTeamForUser() {
+export async function getUserOrganization() {
   const user = await getUser();
   if (!user) {
     return null;
   }
 
-  const result = await db.query.teamMembers.findFirst({
-    where: eq(teamMembers.userId, user.id),
+  const result = await db.query.memberships.findFirst({
+    where: eq(memberships.userId, user.id),
     with: {
-      team: {
+      organization: {
         with: {
-          teamMembers: {
+          memberships: {
             with: {
-              user: {
-                columns: {
-                  id: true,
-                  name: true,
-                  email: true
-                }
-              }
+              organization: true
             }
-          }
+          },
+          portals: true
         }
       }
     }
   });
 
-  return result?.team || null;
+  return result?.organization || null;
+}
+
+export async function getUserMemberships() {
+  const user = await getUser();
+  if (!user) {
+    return [];
+  }
+
+  return await db.query.memberships.findMany({
+    where: eq(memberships.userId, user.id),
+    with: {
+      organization: true
+    }
+  });
+}
+
+export async function getOrganizationPortals(orgId: string) {
+  return await db.query.portals.findMany({
+    where: eq(portals.orgId, orgId),
+    with: {
+      events: {
+        orderBy: desc(portalEvents.createdAt),
+        limit: 10
+      }
+    }
+  });
+}
+
+export async function getPortalEvents(portalId: string) {
+  return await db.query.portalEvents.findMany({
+    where: eq(portalEvents.portalId, portalId),
+    orderBy: desc(portalEvents.createdAt),
+    limit: 50
+  });
+}
+
+export async function createPortal(orgId: string, portalData: {
+  name: string;
+  slug: string;
+  destinationUrl: string;
+  theme?: any;
+}) {
+  const [portal] = await db.insert(portals).values({
+    orgId,
+    ...portalData
+  }).returning();
+
+  return portal;
+}
+
+export async function createPortalEvent(portalId: string, eventData: {
+  userId?: string;
+  eventType: 'scan' | 'click' | 'visit';
+  metadata?: any;
+}) {
+  const [event] = await db.insert(portalEvents).values({
+    portalId,
+    ...eventData
+  }).returning();
+
+  return event;
+}
+
+export async function updatePortal(portalId: string, updates: {
+  name?: string;
+  slug?: string;
+  destinationUrl?: string;
+  theme?: any;
+}) {
+  const [portal] = await db.update(portals)
+    .set(updates)
+    .where(eq(portals.id, portalId))
+    .returning();
+
+  return portal;
+}
+
+export async function deletePortal(portalId: string) {
+  await db.delete(portals).where(eq(portals.id, portalId));
+}
+
+export async function getOrganizationMembers(orgId: string) {
+  return await db.query.memberships.findMany({
+    where: eq(memberships.orgId, orgId),
+    with: {
+      organization: true
+    }
+  });
+}
+
+export async function addOrganizationMember(orgId: string, userId: string, role: 'admin' | 'member' = 'member') {
+  const [membership] = await db.insert(memberships).values({
+    orgId,
+    userId,
+    role
+  }).returning();
+
+  return membership;
+}
+
+export async function removeOrganizationMember(orgId: string, userId: string) {
+  await db.delete(memberships).where(
+    and(
+      eq(memberships.orgId, orgId),
+      eq(memberships.userId, userId)
+    )
+  );
+}
+
+export async function updateMemberRole(orgId: string, userId: string, role: 'admin' | 'member') {
+  const [membership] = await db.update(memberships)
+    .set({ role })
+    .where(
+      and(
+        eq(memberships.orgId, orgId),
+        eq(memberships.userId, userId)
+      )
+    )
+    .returning();
+
+  return membership;
 }
