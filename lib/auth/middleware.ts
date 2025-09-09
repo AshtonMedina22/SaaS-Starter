@@ -1,6 +1,7 @@
 import { z } from 'zod';
-import { TeamDataWithMembers, User } from '@/lib/db/schema';
-import { getTeamForUser, getUser } from '@/lib/db/queries';
+import { User } from '@supabase/supabase-js';
+import { getUser } from '@/lib/auth/session';
+import { getUserOrganization } from '@/lib/db/queries';
 import { redirect } from 'next/navigation';
 
 export type ActionState = {
@@ -53,23 +54,23 @@ export function validatedActionWithUser<S extends z.ZodType<any, any>, T>(
   };
 }
 
-type ActionWithTeamFunction<T> = (
+type ActionWithOrganizationFunction<T> = (
   formData: FormData,
-  team: TeamDataWithMembers
+  organization: any
 ) => Promise<T>;
 
-export function withTeam<T>(action: ActionWithTeamFunction<T>) {
+export function withOrganization<T>(action: ActionWithOrganizationFunction<T>) {
   return async (formData: FormData): Promise<T> => {
     const user = await getUser();
     if (!user) {
       redirect('/sign-in');
     }
 
-    const team = await getTeamForUser();
-    if (!team) {
-      throw new Error('Team not found');
+    const organization = await getUserOrganization();
+    if (!organization) {
+      throw new Error('Organization not found');
     }
 
-    return action(formData, team);
+    return action(formData, organization);
   };
 }
