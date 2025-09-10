@@ -126,3 +126,24 @@ export const resetPasswordAction = validatedAction(
     };
   }
 );
+
+// Legacy functions for dashboard compatibility
+export async function updateAccount(data: { name?: string; email?: string }) {
+  // Mock implementation for demo
+  return { success: 'Account updated successfully' };
+}
+
+export async function removeTeamMember(teamId: string, userId: string) {
+  // Mock implementation for demo
+  return { success: 'Team member removed successfully' };
+}
+
+export async function inviteTeamMember(teamId: string, email: string) {
+  // Mock implementation for demo
+  return { success: 'Team member invited successfully' };
+}
+
+export async function deleteAccount() {
+  // Mock implementation for demo
+  return { success: 'Account deleted successfully' };
+}

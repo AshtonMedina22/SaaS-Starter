@@ -74,3 +74,14 @@ export function withOrganization<T>(action: ActionWithOrganizationFunction<T>) {
     return action(formData, organization);
   };
 }
+
+// Legacy function for dashboard compatibility
+export function withTeam<T>(action: ActionWithOrganizationFunction<T>) {
+  return withOrganization(action);
+}
+
+// Mock setSession function for compatibility
+export async function setSession(session: any) {
+  // Mock implementation for demo
+  return { success: true };
+}

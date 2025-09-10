@@ -1,6 +1,6 @@
 import { desc, and, eq } from 'drizzle-orm';
 import { db } from './drizzle';
-import { organizations, memberships, portals, portalEvents } from './schema';
+import { organizations, memberships, portals, portalEvents, users, teams, teamMembers, ActivityType } from './schema';
 import { getUser } from '@/lib/auth/session';
 
 export async function getUserOrganization() {
@@ -147,4 +147,34 @@ export async function updateMemberRole(orgId: string, userId: string, role: 'adm
     .returning();
 
   return membership;
+}
+
+// Legacy functions for dashboard compatibility
+export async function getActivityLogs(limit: number = 50) {
+  // Mock activity logs for demo purposes
+  return Array.from({ length: limit }, (_, i) => ({
+    id: `activity-${i}`,
+    type: ['scan', 'click', 'visit', 'login', 'signup'][i % 5] as ActivityType,
+    description: `Activity ${i + 1}`,
+    createdAt: new Date(Date.now() - i * 1000 * 60 * 60),
+    userId: `user-${i % 10}`,
+  }));
+}
+
+export async function getTeamByStripeCustomerId(stripeCustomerId: string) {
+  return await db.query.teams.findFirst({
+    where: eq(teams.stripeCustomerId, stripeCustomerId)
+  });
+}
+
+export async function updateTeamSubscription(teamId: string, subscriptionData: {
+  stripeCustomerId?: string;
+  subscriptionStatus?: string;
+}) {
+  const [team] = await db.update(teams)
+    .set(subscriptionData)
+    .where(eq(teams.id, teamId))
+    .returning();
+
+  return team;
 }

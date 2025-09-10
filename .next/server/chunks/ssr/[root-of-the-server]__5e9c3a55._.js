@@ -243,10 +243,14 @@ __turbopack_context__.s({
     "portalEvents": (()=>portalEvents),
     "portalEventsRelations": (()=>portalEventsRelations),
     "portals": (()=>portals),
-    "portalsRelations": (()=>portalsRelations)
+    "portalsRelations": (()=>portalsRelations),
+    "teamMembers": (()=>teamMembers),
+    "teams": (()=>teams),
+    "users": (()=>users)
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$drizzle$2d$orm$40$0$2e$43$2e$1_gel$40$2$2e$1$2e$0_postgres$40$3$2e$4$2e$5$2f$node_modules$2f$drizzle$2d$orm$2f$pg$2d$core$2f$table$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/.pnpm/drizzle-orm@0.43.1_gel@2.1.0_postgres@3.4.5/node_modules/drizzle-orm/pg-core/table.js [app-rsc] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$drizzle$2d$orm$40$0$2e$43$2e$1_gel$40$2$2e$1$2e$0_postgres$40$3$2e$4$2e$5$2f$node_modules$2f$drizzle$2d$orm$2f$pg$2d$core$2f$columns$2f$uuid$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/.pnpm/drizzle-orm@0.43.1_gel@2.1.0_postgres@3.4.5/node_modules/drizzle-orm/pg-core/columns/uuid.js [app-rsc] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$drizzle$2d$orm$40$0$2e$43$2e$1_gel$40$2$2e$1$2e$0_postgres$40$3$2e$4$2e$5$2f$node_modules$2f$drizzle$2d$orm$2f$pg$2d$core$2f$columns$2f$varchar$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/.pnpm/drizzle-orm@0.43.1_gel@2.1.0_postgres@3.4.5/node_modules/drizzle-orm/pg-core/columns/varchar.js [app-rsc] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$drizzle$2d$orm$40$0$2e$43$2e$1_gel$40$2$2e$1$2e$0_postgres$40$3$2e$4$2e$5$2f$node_modules$2f$drizzle$2d$orm$2f$pg$2d$core$2f$columns$2f$text$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/.pnpm/drizzle-orm@0.43.1_gel@2.1.0_postgres@3.4.5/node_modules/drizzle-orm/pg-core/columns/text.js [app-rsc] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$drizzle$2d$orm$40$0$2e$43$2e$1_gel$40$2$2e$1$2e$0_postgres$40$3$2e$4$2e$5$2f$node_modules$2f$drizzle$2d$orm$2f$pg$2d$core$2f$columns$2f$timestamp$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/.pnpm/drizzle-orm@0.43.1_gel@2.1.0_postgres@3.4.5/node_modules/drizzle-orm/pg-core/columns/timestamp.js [app-rsc] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$drizzle$2d$orm$40$0$2e$43$2e$1_gel$40$2$2e$1$2e$0_postgres$40$3$2e$4$2e$5$2f$node_modules$2f$drizzle$2d$orm$2f$pg$2d$core$2f$columns$2f$jsonb$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/.pnpm/drizzle-orm@0.43.1_gel@2.1.0_postgres@3.4.5/node_modules/drizzle-orm/pg-core/columns/jsonb.js [app-rsc] (ecmascript)");
@@ -263,6 +267,40 @@ const eventTypeEnum = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_m
     'click',
     'visit'
 ]);
+const users = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$drizzle$2d$orm$40$0$2e$43$2e$1_gel$40$2$2e$1$2e$0_postgres$40$3$2e$4$2e$5$2f$node_modules$2f$drizzle$2d$orm$2f$pg$2d$core$2f$table$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["pgTable"])('users', {
+    id: (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$drizzle$2d$orm$40$0$2e$43$2e$1_gel$40$2$2e$1$2e$0_postgres$40$3$2e$4$2e$5$2f$node_modules$2f$drizzle$2d$orm$2f$pg$2d$core$2f$columns$2f$uuid$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["uuid"])('id').primaryKey().defaultRandom(),
+    email: (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$drizzle$2d$orm$40$0$2e$43$2e$1_gel$40$2$2e$1$2e$0_postgres$40$3$2e$4$2e$5$2f$node_modules$2f$drizzle$2d$orm$2f$pg$2d$core$2f$columns$2f$varchar$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["varchar"])('email', {
+        length: 255
+    }).notNull().unique(),
+    name: (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$drizzle$2d$orm$40$0$2e$43$2e$1_gel$40$2$2e$1$2e$0_postgres$40$3$2e$4$2e$5$2f$node_modules$2f$drizzle$2d$orm$2f$pg$2d$core$2f$columns$2f$varchar$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["varchar"])('name', {
+        length: 255
+    }),
+    createdAt: (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$drizzle$2d$orm$40$0$2e$43$2e$1_gel$40$2$2e$1$2e$0_postgres$40$3$2e$4$2e$5$2f$node_modules$2f$drizzle$2d$orm$2f$pg$2d$core$2f$columns$2f$timestamp$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["timestamp"])('created_at').defaultNow().notNull()
+});
+const teams = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$drizzle$2d$orm$40$0$2e$43$2e$1_gel$40$2$2e$1$2e$0_postgres$40$3$2e$4$2e$5$2f$node_modules$2f$drizzle$2d$orm$2f$pg$2d$core$2f$table$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["pgTable"])('teams', {
+    id: (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$drizzle$2d$orm$40$0$2e$43$2e$1_gel$40$2$2e$1$2e$0_postgres$40$3$2e$4$2e$5$2f$node_modules$2f$drizzle$2d$orm$2f$pg$2d$core$2f$columns$2f$uuid$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["uuid"])('id').primaryKey().defaultRandom(),
+    name: (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$drizzle$2d$orm$40$0$2e$43$2e$1_gel$40$2$2e$1$2e$0_postgres$40$3$2e$4$2e$5$2f$node_modules$2f$drizzle$2d$orm$2f$pg$2d$core$2f$columns$2f$varchar$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["varchar"])('name', {
+        length: 255
+    }).notNull(),
+    stripeCustomerId: (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$drizzle$2d$orm$40$0$2e$43$2e$1_gel$40$2$2e$1$2e$0_postgres$40$3$2e$4$2e$5$2f$node_modules$2f$drizzle$2d$orm$2f$pg$2d$core$2f$columns$2f$varchar$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["varchar"])('stripe_customer_id', {
+        length: 255
+    }),
+    subscriptionStatus: (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$drizzle$2d$orm$40$0$2e$43$2e$1_gel$40$2$2e$1$2e$0_postgres$40$3$2e$4$2e$5$2f$node_modules$2f$drizzle$2d$orm$2f$pg$2d$core$2f$columns$2f$varchar$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["varchar"])('subscription_status', {
+        length: 50
+    }),
+    createdAt: (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$drizzle$2d$orm$40$0$2e$43$2e$1_gel$40$2$2e$1$2e$0_postgres$40$3$2e$4$2e$5$2f$node_modules$2f$drizzle$2d$orm$2f$pg$2d$core$2f$columns$2f$timestamp$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["timestamp"])('created_at').defaultNow().notNull()
+});
+const teamMembers = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$drizzle$2d$orm$40$0$2e$43$2e$1_gel$40$2$2e$1$2e$0_postgres$40$3$2e$4$2e$5$2f$node_modules$2f$drizzle$2d$orm$2f$pg$2d$core$2f$table$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["pgTable"])('team_members', {
+    id: (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$drizzle$2d$orm$40$0$2e$43$2e$1_gel$40$2$2e$1$2e$0_postgres$40$3$2e$4$2e$5$2f$node_modules$2f$drizzle$2d$orm$2f$pg$2d$core$2f$columns$2f$uuid$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["uuid"])('id').primaryKey().defaultRandom(),
+    teamId: (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$drizzle$2d$orm$40$0$2e$43$2e$1_gel$40$2$2e$1$2e$0_postgres$40$3$2e$4$2e$5$2f$node_modules$2f$drizzle$2d$orm$2f$pg$2d$core$2f$columns$2f$uuid$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["uuid"])('team_id').notNull().references(()=>teams.id, {
+        onDelete: 'cascade'
+    }),
+    userId: (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$drizzle$2d$orm$40$0$2e$43$2e$1_gel$40$2$2e$1$2e$0_postgres$40$3$2e$4$2e$5$2f$node_modules$2f$drizzle$2d$orm$2f$pg$2d$core$2f$columns$2f$uuid$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["uuid"])('user_id').notNull().references(()=>users.id, {
+        onDelete: 'cascade'
+    }),
+    role: membershipRoleEnum('role').notNull().default('member'),
+    createdAt: (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$drizzle$2d$orm$40$0$2e$43$2e$1_gel$40$2$2e$1$2e$0_postgres$40$3$2e$4$2e$5$2f$node_modules$2f$drizzle$2d$orm$2f$pg$2d$core$2f$columns$2f$timestamp$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["timestamp"])('created_at').defaultNow().notNull()
+});
 const organizations = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$drizzle$2d$orm$40$0$2e$43$2e$1_gel$40$2$2e$1$2e$0_postgres$40$3$2e$4$2e$5$2f$node_modules$2f$drizzle$2d$orm$2f$pg$2d$core$2f$table$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["pgTable"])('organizations', {
     id: (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$drizzle$2d$orm$40$0$2e$43$2e$1_gel$40$2$2e$1$2e$0_postgres$40$3$2e$4$2e$5$2f$node_modules$2f$drizzle$2d$orm$2f$pg$2d$core$2f$columns$2f$uuid$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["uuid"])('id').primaryKey().defaultRandom(),
     name: (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$drizzle$2d$orm$40$0$2e$43$2e$1_gel$40$2$2e$1$2e$0_postgres$40$3$2e$4$2e$5$2f$node_modules$2f$drizzle$2d$orm$2f$pg$2d$core$2f$columns$2f$text$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["text"])('name').notNull(),
@@ -366,14 +404,17 @@ __turbopack_context__.s({
     "createPortal": (()=>createPortal),
     "createPortalEvent": (()=>createPortalEvent),
     "deletePortal": (()=>deletePortal),
+    "getActivityLogs": (()=>getActivityLogs),
     "getOrganizationMembers": (()=>getOrganizationMembers),
     "getOrganizationPortals": (()=>getOrganizationPortals),
     "getPortalEvents": (()=>getPortalEvents),
+    "getTeamByStripeCustomerId": (()=>getTeamByStripeCustomerId),
     "getUserMemberships": (()=>getUserMemberships),
     "getUserOrganization": (()=>getUserOrganization),
     "removeOrganizationMember": (()=>removeOrganizationMember),
     "updateMemberRole": (()=>updateMemberRole),
-    "updatePortal": (()=>updatePortal)
+    "updatePortal": (()=>updatePortal),
+    "updateTeamSubscription": (()=>updateTeamSubscription)
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$drizzle$2d$orm$40$0$2e$43$2e$1_gel$40$2$2e$1$2e$0_postgres$40$3$2e$4$2e$5$2f$node_modules$2f$drizzle$2d$orm$2f$sql$2f$expressions$2f$select$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/.pnpm/drizzle-orm@0.43.1_gel@2.1.0_postgres@3.4.5/node_modules/drizzle-orm/sql/expressions/select.js [app-rsc] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$drizzle$2d$orm$40$0$2e$43$2e$1_gel$40$2$2e$1$2e$0_postgres$40$3$2e$4$2e$5$2f$node_modules$2f$drizzle$2d$orm$2f$sql$2f$expressions$2f$conditions$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/.pnpm/drizzle-orm@0.43.1_gel@2.1.0_postgres@3.4.5/node_modules/drizzle-orm/sql/expressions/conditions.js [app-rsc] (ecmascript)");
@@ -481,6 +522,33 @@ async function updateMemberRole(orgId, userId, role) {
         role
     }).where((0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$drizzle$2d$orm$40$0$2e$43$2e$1_gel$40$2$2e$1$2e$0_postgres$40$3$2e$4$2e$5$2f$node_modules$2f$drizzle$2d$orm$2f$sql$2f$expressions$2f$conditions$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["and"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$drizzle$2d$orm$40$0$2e$43$2e$1_gel$40$2$2e$1$2e$0_postgres$40$3$2e$4$2e$5$2f$node_modules$2f$drizzle$2d$orm$2f$sql$2f$expressions$2f$conditions$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["eq"])(__TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$db$2f$schema$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["memberships"].orgId, orgId), (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$drizzle$2d$orm$40$0$2e$43$2e$1_gel$40$2$2e$1$2e$0_postgres$40$3$2e$4$2e$5$2f$node_modules$2f$drizzle$2d$orm$2f$sql$2f$expressions$2f$conditions$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["eq"])(__TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$db$2f$schema$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["memberships"].userId, userId))).returning();
     return membership;
+}
+async function getActivityLogs(limit = 50) {
+    // Mock activity logs for demo purposes
+    return Array.from({
+        length: limit
+    }, (_, i)=>({
+            id: `activity-${i}`,
+            type: [
+                'scan',
+                'click',
+                'visit',
+                'login',
+                'signup'
+            ][i % 5],
+            description: `Activity ${i + 1}`,
+            createdAt: new Date(Date.now() - i * 1000 * 60 * 60),
+            userId: `user-${i % 10}`
+        }));
+}
+async function getTeamByStripeCustomerId(stripeCustomerId) {
+    return await __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$db$2f$drizzle$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["db"].query.teams.findFirst({
+        where: (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$drizzle$2d$orm$40$0$2e$43$2e$1_gel$40$2$2e$1$2e$0_postgres$40$3$2e$4$2e$5$2f$node_modules$2f$drizzle$2d$orm$2f$sql$2f$expressions$2f$conditions$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["eq"])(__TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$db$2f$schema$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["teams"].stripeCustomerId, stripeCustomerId)
+    });
+}
+async function updateTeamSubscription(teamId, subscriptionData) {
+    const [team] = await __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$db$2f$drizzle$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["db"].update(__TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$db$2f$schema$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["teams"]).set(subscriptionData).where((0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$drizzle$2d$orm$40$0$2e$43$2e$1_gel$40$2$2e$1$2e$0_postgres$40$3$2e$4$2e$5$2f$node_modules$2f$drizzle$2d$orm$2f$sql$2f$expressions$2f$conditions$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["eq"])(__TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$db$2f$schema$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["teams"].id, teamId)).returning();
+    return team;
 }
 }),
 "[project]/app/layout.tsx [app-rsc] (ecmascript)": ((__turbopack_context__) => {

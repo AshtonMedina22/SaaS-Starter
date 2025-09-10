@@ -13,6 +13,33 @@ import { relations } from 'drizzle-orm';
 export const membershipRoleEnum = pgEnum('membership_role', ['admin', 'member']);
 export const eventTypeEnum = pgEnum('event_type', ['scan', 'click', 'visit']);
 
+// Activity types for dashboard
+export type ActivityType = 'scan' | 'click' | 'visit' | 'login' | 'signup' | 'payment' | 'team_invite' | 'team_remove';
+
+// Legacy tables for compatibility
+export const users = pgTable('users', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  email: varchar('email', { length: 255 }).notNull().unique(),
+  name: varchar('name', { length: 255 }),
+  createdAt: timestamp('created_at').defaultNow().notNull(),
+});
+
+export const teams = pgTable('teams', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  name: varchar('name', { length: 255 }).notNull(),
+  stripeCustomerId: varchar('stripe_customer_id', { length: 255 }),
+  subscriptionStatus: varchar('subscription_status', { length: 50 }),
+  createdAt: timestamp('created_at').defaultNow().notNull(),
+});
+
+export const teamMembers = pgTable('team_members', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  teamId: uuid('team_id').notNull().references(() => teams.id, { onDelete: 'cascade' }),
+  userId: uuid('user_id').notNull().references(() => users.id, { onDelete: 'cascade' }),
+  role: membershipRoleEnum('role').notNull().default('member'),
+  createdAt: timestamp('created_at').defaultNow().notNull(),
+});
+
 // Organizations table
 export const organizations = pgTable('organizations', {
   id: uuid('id').primaryKey().defaultRandom(),

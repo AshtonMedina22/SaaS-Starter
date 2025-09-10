@@ -4,9 +4,11 @@ module.exports = {
 "use strict";
 
 __turbopack_context__.s({
+    "setSession": (()=>setSession),
     "validatedAction": (()=>validatedAction),
     "validatedActionWithUser": (()=>validatedActionWithUser),
-    "withOrganization": (()=>withOrganization)
+    "withOrganization": (()=>withOrganization),
+    "withTeam": (()=>withTeam)
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$auth$2f$session$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/lib/auth/session.ts [app-rsc] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$db$2f$queries$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/lib/db/queries.ts [app-rsc] (ecmascript)");
@@ -54,15 +56,28 @@ function withOrganization(action) {
         return action(formData, organization);
     };
 }
+function withTeam(action) {
+    return withOrganization(action);
+}
+async function setSession(session) {
+    // Mock implementation for demo
+    return {
+        success: true
+    };
+}
 }),
 "[project]/app/(login)/actions.ts [app-rsc] (ecmascript)": ((__turbopack_context__) => {
 "use strict";
 
-/* __next_internal_action_entry_do_not_use__ [{"00698d418fbb22a7adb41e6fa822d04e93a3603d47":"signOutAction","7f07b702ce8085c445bf854705aaee86832a52205b":"resetPasswordAction","7f36080290f6847633088905a93fa623b80e097780":"updatePasswordAction","7f56b4ec5a5880597ee056f9c9bfa20a9576641408":"signIn","7fc9ba8033400fe8d69c4df257b6abda8c6a1875f1":"signUp"},"",""] */ __turbopack_context__.s({
+/* __next_internal_action_entry_do_not_use__ [{"00698d418fbb22a7adb41e6fa822d04e93a3603d47":"signOutAction","00e5aadd7e444bfa478d09f1923cf1023ead089e2a":"deleteAccount","404dab08283c67e75fe81894ad09708e72a7ff1739":"updateAccount","600db5a65636b407eb803d4f7190891b0ecc86ee48":"inviteTeamMember","60a35a47c2624eba7135e1d50d67d9dc9be02360ff":"removeTeamMember","7f07b702ce8085c445bf854705aaee86832a52205b":"resetPasswordAction","7f36080290f6847633088905a93fa623b80e097780":"updatePasswordAction","7f56b4ec5a5880597ee056f9c9bfa20a9576641408":"signIn","7fc9ba8033400fe8d69c4df257b6abda8c6a1875f1":"signUp"},"",""] */ __turbopack_context__.s({
+    "deleteAccount": (()=>deleteAccount),
+    "inviteTeamMember": (()=>inviteTeamMember),
+    "removeTeamMember": (()=>removeTeamMember),
     "resetPasswordAction": (()=>resetPasswordAction),
     "signIn": (()=>signIn),
     "signOutAction": (()=>signOutAction),
     "signUp": (()=>signUp),
+    "updateAccount": (()=>updateAccount),
     "updatePasswordAction": (()=>updatePasswordAction)
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$15$2e$4$2e$0$2d$canary$2e$47_react_818dc233c00a743137786d541e7239b1$2f$node_modules$2f$next$2f$dist$2f$build$2f$webpack$2f$loaders$2f$next$2d$flight$2d$loader$2f$server$2d$reference$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/.pnpm/next@15.4.0-canary.47_react_818dc233c00a743137786d541e7239b1/node_modules/next/dist/build/webpack/loaders/next-flight-loader/server-reference.js [app-rsc] (ecmascript)");
@@ -167,19 +182,51 @@ const resetPasswordAction = (0, __TURBOPACK__imported__module__$5b$project$5d2f$
         success: 'Password reset email sent successfully.'
     };
 });
+async function updateAccount(data) {
+    // Mock implementation for demo
+    return {
+        success: 'Account updated successfully'
+    };
+}
+async function removeTeamMember(teamId, userId) {
+    // Mock implementation for demo
+    return {
+        success: 'Team member removed successfully'
+    };
+}
+async function inviteTeamMember(teamId, email) {
+    // Mock implementation for demo
+    return {
+        success: 'Team member invited successfully'
+    };
+}
+async function deleteAccount() {
+    // Mock implementation for demo
+    return {
+        success: 'Account deleted successfully'
+    };
+}
 ;
 (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$15$2e$4$2e$0$2d$canary$2e$47_react_818dc233c00a743137786d541e7239b1$2f$node_modules$2f$next$2f$dist$2f$build$2f$webpack$2f$loaders$2f$next$2d$flight$2d$loader$2f$action$2d$validate$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["ensureServerEntryExports"])([
     signIn,
     signUp,
     signOutAction,
     updatePasswordAction,
-    resetPasswordAction
+    resetPasswordAction,
+    updateAccount,
+    removeTeamMember,
+    inviteTeamMember,
+    deleteAccount
 ]);
 (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$15$2e$4$2e$0$2d$canary$2e$47_react_818dc233c00a743137786d541e7239b1$2f$node_modules$2f$next$2f$dist$2f$build$2f$webpack$2f$loaders$2f$next$2d$flight$2d$loader$2f$server$2d$reference$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["registerServerReference"])(signIn, "7f56b4ec5a5880597ee056f9c9bfa20a9576641408", null);
 (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$15$2e$4$2e$0$2d$canary$2e$47_react_818dc233c00a743137786d541e7239b1$2f$node_modules$2f$next$2f$dist$2f$build$2f$webpack$2f$loaders$2f$next$2d$flight$2d$loader$2f$server$2d$reference$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["registerServerReference"])(signUp, "7fc9ba8033400fe8d69c4df257b6abda8c6a1875f1", null);
 (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$15$2e$4$2e$0$2d$canary$2e$47_react_818dc233c00a743137786d541e7239b1$2f$node_modules$2f$next$2f$dist$2f$build$2f$webpack$2f$loaders$2f$next$2d$flight$2d$loader$2f$server$2d$reference$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["registerServerReference"])(signOutAction, "00698d418fbb22a7adb41e6fa822d04e93a3603d47", null);
 (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$15$2e$4$2e$0$2d$canary$2e$47_react_818dc233c00a743137786d541e7239b1$2f$node_modules$2f$next$2f$dist$2f$build$2f$webpack$2f$loaders$2f$next$2d$flight$2d$loader$2f$server$2d$reference$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["registerServerReference"])(updatePasswordAction, "7f36080290f6847633088905a93fa623b80e097780", null);
 (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$15$2e$4$2e$0$2d$canary$2e$47_react_818dc233c00a743137786d541e7239b1$2f$node_modules$2f$next$2f$dist$2f$build$2f$webpack$2f$loaders$2f$next$2d$flight$2d$loader$2f$server$2d$reference$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["registerServerReference"])(resetPasswordAction, "7f07b702ce8085c445bf854705aaee86832a52205b", null);
+(0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$15$2e$4$2e$0$2d$canary$2e$47_react_818dc233c00a743137786d541e7239b1$2f$node_modules$2f$next$2f$dist$2f$build$2f$webpack$2f$loaders$2f$next$2d$flight$2d$loader$2f$server$2d$reference$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["registerServerReference"])(updateAccount, "404dab08283c67e75fe81894ad09708e72a7ff1739", null);
+(0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$15$2e$4$2e$0$2d$canary$2e$47_react_818dc233c00a743137786d541e7239b1$2f$node_modules$2f$next$2f$dist$2f$build$2f$webpack$2f$loaders$2f$next$2d$flight$2d$loader$2f$server$2d$reference$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["registerServerReference"])(removeTeamMember, "60a35a47c2624eba7135e1d50d67d9dc9be02360ff", null);
+(0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$15$2e$4$2e$0$2d$canary$2e$47_react_818dc233c00a743137786d541e7239b1$2f$node_modules$2f$next$2f$dist$2f$build$2f$webpack$2f$loaders$2f$next$2d$flight$2d$loader$2f$server$2d$reference$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["registerServerReference"])(inviteTeamMember, "600db5a65636b407eb803d4f7190891b0ecc86ee48", null);
+(0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$15$2e$4$2e$0$2d$canary$2e$47_react_818dc233c00a743137786d541e7239b1$2f$node_modules$2f$next$2f$dist$2f$build$2f$webpack$2f$loaders$2f$next$2d$flight$2d$loader$2f$server$2d$reference$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["registerServerReference"])(deleteAccount, "00e5aadd7e444bfa478d09f1923cf1023ead089e2a", null);
 }),
 "[project]/.next-internal/server/app/(dashboard)/page/actions.js { ACTIONS_MODULE0 => \"[project]/app/(login)/actions.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript) <locals>": ((__turbopack_context__) => {
 "use strict";
