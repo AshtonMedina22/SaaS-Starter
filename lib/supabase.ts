@@ -1,14 +1,17 @@
 // lib/supabase.ts
 import { createBrowserClient, createServerClient } from '@supabase/ssr'
-import { cookies } from 'next/headers'
 
+// Client-side Supabase client
 export const supabase = createBrowserClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
 )
 
-export const createClient = () => {
-  const cookieStore = cookies()
+// Server-side Supabase client
+export const createClient = async () => {
+  // Import cookies only when this function is called (server-side)
+  const { cookies } = require('next/headers')
+  const cookieStore = await cookies()
 
   return createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,

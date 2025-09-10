@@ -2,7 +2,7 @@ import { createClient } from '@/lib/supabase';
 import { User } from '@supabase/supabase-js';
 
 export async function getSession() {
-  const supabase = createClient();
+  const supabase = await createClient();
   const { data: { session }, error } = await supabase.auth.getSession();
   
   if (error || !session) {
@@ -18,12 +18,12 @@ export async function getUser(): Promise<User | null> {
 }
 
 export async function signOut() {
-  const supabase = createClient();
+  const supabase = await createClient();
   await supabase.auth.signOut();
 }
 
 export async function signInWithEmail(email: string, password: string) {
-  const supabase = createClient();
+  const supabase = await createClient();
   const { data, error } = await supabase.auth.signInWithPassword({
     email,
     password,
@@ -33,7 +33,7 @@ export async function signInWithEmail(email: string, password: string) {
 }
 
 export async function signUpWithEmail(email: string, password: string) {
-  const supabase = createClient();
+  const supabase = await createClient();
   const { data, error } = await supabase.auth.signUp({
     email,
     password,
@@ -43,7 +43,7 @@ export async function signUpWithEmail(email: string, password: string) {
 }
 
 export async function resetPassword(email: string) {
-  const supabase = createClient();
+  const supabase = await createClient();
   const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
     redirectTo: `${process.env.BASE_URL}/auth/reset-password`,
   });
@@ -52,7 +52,7 @@ export async function resetPassword(email: string) {
 }
 
 export async function updatePassword(password: string) {
-  const supabase = createClient();
+  const supabase = await createClient();
   const { data, error } = await supabase.auth.updateUser({
     password,
   });
